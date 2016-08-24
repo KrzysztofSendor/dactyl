@@ -3,6 +3,8 @@ from slackbot.bot import listen_to
 import re
 import urllib
 
+import database
+
 
 def url_validator(url):
     try:
@@ -19,3 +21,17 @@ def test_url(message, url):
         message.reply('VALID URL')
     else:
         message.reply('NOT VALID URL')
+
+
+@respond_to('[[Dd]atabase test')
+def test_db(message):
+    if database.check_db():
+        message.reply('I can see the database.')
+    else:
+        message.reply('I can\'t see the database.')
+        message.reply('To create one write `database create`')
+
+
+@respond_to('[Dd]atabase create')
+def create_db(message):
+    message.reply(database.create_db())
