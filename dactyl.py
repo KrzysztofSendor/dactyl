@@ -13,6 +13,7 @@ def url_validator(url):
         return False
 
 
+@respond_to('[Tt]est (\<[\w\d\s\:\/\.\-\_]*[\>\|])')
 def test_url(message, url):
     if url_validator(url[1:len(url)-1]):
         message.reply('VALID URL')
