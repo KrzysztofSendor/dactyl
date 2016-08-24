@@ -2,7 +2,8 @@ import sqlite3
 import datetime
 import os
 
-db = 'dactyl.db'
+location = os.path.dirname(os.path.abspath(__file__))
+db = location + '/dactyl.db'
 
 
 def check_db():
