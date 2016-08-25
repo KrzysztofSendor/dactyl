@@ -46,7 +46,7 @@ def create_db():
     return '*Database created successfully*!'
 
 
-def list_last(number):
+def list(number):
     try:
         conn = sqlite3.connect(db)
     except:
@@ -63,7 +63,24 @@ def list_last(number):
         conn.close()
         return data
     except:
-        print 'SMTING WENT WONG'
+        return 'There appears to be problem with database.'
 
-# SELECT link, time_stamp FROM (SELECT * FROM links ORDER BY id DESC LIMIT 2)
-# ORDER BY id;
+
+def add_manual(url):
+    try:
+        conn = sqlite3.connect(db)
+    except:
+        return 'Couldn\'t connect to database.'
+    try:
+        c = conn.cursor()
+        c.execute(
+            '''
+            INSERT INTO links (link, time_stamp) VALUES (?, ?)
+            ''',
+            (url, datetime.datetime.now())
+        )
+        conn.commit()
+        conn.close()
+        return 'Url added successfuly.'
+    except:
+        return 'There appears to be problem with database.'
