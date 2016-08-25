@@ -39,3 +39,19 @@ def create_db(message):
     else:
         message.reply(database.create_db())
 
+
+@respond_to('[Ll]ist last (\d+)')
+def list_last(message, number):
+    if database.check_db():
+        data = database.list_last(number)
+        final_message = '```\n'
+        for row in data:
+            final_message += row[1]
+            final_message += ' | '
+            final_message += row[0]
+            final_message += '\n'
+        final_message += '```'
+        message.reply(final_message)
+    else:
+        message.reply('No database to work with.')
+        message.reply('To create one write `database create`')
