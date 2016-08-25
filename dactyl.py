@@ -34,4 +34,8 @@ def test_db(message):
 
 @respond_to('[Dd]atabase create')
 def create_db(message):
-    message.reply(database.create_db())
+    if database.check_db():
+        message.reply('Database already exists.')
+    else:
+        message.reply(database.create_db())
+
